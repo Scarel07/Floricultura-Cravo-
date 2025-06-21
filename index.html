@@ -24,62 +24,399 @@
             --shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: var(--font-secondary); background: var(--background-light); color: var(--text-color); line-height: 1.7; overflow-x: hidden; }
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        nav { background-color: transparent; color: var(--white-color); padding: 20px 40px; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease; }
-        nav.scrolled { background-color: var(--primary-color); padding: 15px 40px; box-shadow: var(--shadow); backdrop-filter: blur(5px); }
-        nav ul { display: flex; gap: 25px; list-style: none; }
-        nav a { color: var(--white-color); text-decoration: none; font-weight: 600; position: relative; padding-bottom: 5px; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; transform: translateX(-50%); background-color: var(--accent-color); transition: width 0.3s ease; }
-        nav a:hover::after { width: 100%; }
-        .btn-orcamento { background-color: var(--accent-color); color: var(--secondary-color); border: none; padding: 12px 25px; font-weight: bold; border-radius: 50px; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
-        .btn-orcamento:hover { background-color: #f0e6a8; transform: scale(1.05); }
-        .hero { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .video-container video { width: 100%; height: 100%; object-fit: cover; }
-        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; background-color: rgba(22, 78, 50, 0.25); }
-        .header-content { position: relative; z-index: 2; text-align: center; }
-        .logo-img { width: 250px; max-width: 80%; filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.5)); }
-        section { max-width: 1200px; margin: auto; padding: 120px 40px; }
-        h2 { font-family: var(--font-primary); font-size: 3rem; color: var(--primary-color); margin-bottom: 40px; text-align: center; font-weight: 600; }
-        .content-section { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 60px; margin-bottom: 60px; }
-        .content-section:nth-child(even) { flex-direction: row-reverse; }
-        .text-content { flex: 1 1 45%; font-size: 1.1rem; }
-        .text-content ul { list-style: none; padding-left: 0; }
-        .text-content h4 { font-family: var(--font-secondary); font-size: 1.1rem; font-weight: 400; line-height: 1.7; margin-bottom: 10px; color: var(--text-color); }
-        .imagem-extra { flex: 1 1 45%; width: 100%; border-radius: 15px; box-shadow: var(--shadow); transition: transform 0.4s ease, box-shadow 0.4s ease; }
-        .imagem-extra:hover { transform: scale(1.03) translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,0.12); }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .gallery-item { position: relative; overflow: hidden; border-radius: 10px; box-shadow: var(--shadow); cursor: pointer; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
-        .gallery-item:hover img { transform: scale(1.1); }
-        .gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.5s ease; }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
-        .gallery-overlay i { font-size: 50px; color: var(--white-color); }
-        .testimonials-container { max-width: 800px; margin: 0 auto; position: relative; overflow: hidden; padding: 30px; background-color: var(--white-color); border-radius: 15px; box-shadow: var(--shadow); }
-        .testimonial-slide { display: none; text-align: center; animation: fadeInTestimonial 0.8s ease; }
-        .testimonial-slide.active { display: block; }
-        .testimonial-text { font-style: italic; font-size: 1.2rem; margin-bottom: 20px; }
-        .testimonial-author { font-weight: bold; color: var(--primary-color); }
-        .dots-container { text-align: center; margin-top: 20px; }
-        .dot { height: 12px; width: 12px; margin: 0 5px; background-color: #ccc; border-radius: 50%; display: inline-block; cursor: pointer; transition: background-color 0.3s ease; }
-        .dot.active { background-color: var(--primary-color); }
-        @keyframes fadeInTestimonial { from { opacity: 0.3; } to { opacity: 1; } }
-        .contact-form { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: var(--font-secondary); font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; }
-        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(22, 78, 50, 0.2); }
-        .contact-form textarea { resize: vertical; min-height: 150px; }
-        .form-submit-btn { background-color: var(--primary-color); color: var(--white-color); border: none; padding: 15px 30px; font-weight: bold; font-size: 1.1rem; border-radius: 50px; cursor: pointer; transition: background-color 0.3s, transform 0.3s; align-self: center; }
-        .form-submit-btn:hover { background-color: var(--secondary-color); transform: scale(1.05); }
-        footer { background-color: var(--secondary-color); color: var(--white-color); text-align: center; padding: 60px 20px; margin-top: 80px; }
-        .social-icons { margin-bottom: 20px; }
-        .social-icons a { color: var(--white-color); font-size: 2rem; margin: 0 15px; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
-        .social-icons a:hover { color: var(--accent-color); transform: translateY(-5px); }
-        footer p { font-size: 0.9rem; opacity: 0.8; }
-        @media (max-width: 768px) { h2 { font-size: 2.5rem; } section { padding: 80px 20px; } nav { flex-direction: column; padding: 15px; } nav ul { margin-top: 15px; gap: 15px; } .content-section, .content-section:nth-child(even) { flex-direction: column; } .imagem-extra { width: 100%; max-width: 400px; align-self: center; } }
-        @media (max-width: 480px) { nav { display: none; } h2 { font-size: 2rem; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav {
+            background-color: transparent;
+            color: var(--white-color);
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        nav.scrolled {
+            background-color: var(--primary-color);
+            padding: 15px 40px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--white-color);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .btn-orcamento {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-orcamento:hover {
+            background-color: #f0e6a8;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-color: rgba(22, 78, 50, 0.25);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 250px;
+            max-width: 80%;
+            filter: drop-shadow(2px 3px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 120px 40px;
+        }
+
+        h2 {
+            font-family: var(--font-primary);
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .content-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .content-section:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .text-content {
+            flex: 1 1 45%;
+            font-size: 1.1rem;
+        }
+
+        .text-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .text-content h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .imagem-extra {
+            flex: 1 1 45%;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .imagem-extra:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay i {
+            font-size: 50px;
+            color: var(--white-color);
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+            background-color: var(--white-color);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            animation: fadeInTestimonial 0.8s ease;
+        }
+        .testimonial-slide.active {
+            display: block;
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .dots-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+        @keyframes fadeInTestimonial {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: var(--font-secondary);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(22, 78, 50, 0.2);
+        }
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        .form-submit-btn {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            align-self: center;
+        }
+        .form-submit-btn:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 80px;
+        }
+        .social-icons {
+            margin-bottom: 20px;
+        }
+        .social-icons a {
+            color: var(--white-color);
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2.5rem;
+            }
+            section {
+                padding: 80px 20px;
+            }
+            nav {
+                flex-direction: column;
+                padding: 15px;
+            }
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+            }
+            .content-section, .content-section:nth-child(even) {
+                flex-direction: column;
+            }
+            .imagem-extra {
+                width: 100%;
+                max-width: 400px;
+                align-self: center;
+            }
+        }
+        @media (max-width: 480px) {
+            nav { display: none; }
+            h2 { font-size: 2rem; }
+        }
+
     </style>
 </head>
 <body>
@@ -99,12 +436,12 @@
 <header class="hero">
     <div class="video-container">
         <video autoplay muted loop playsinline>
-            <source src="" type="video/mp4">
+            <source src="imagens\WhatsApp Video 2025-06-20 at 20.55.29.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
     </div>
     <div class="header-content fade-in">
-        <img src="https://i.ibb.co/mVgXb43/Cravo-ECanelalogo-letras-brancas.png" class="logo-img" alt="Logo Cravo e Canela"/>
+        <img src="imagens/CravoECanelalogo-letras-brancas.png" class="logo-img" alt="Logo Cravo e Canela"/>
     </div>
 </header>
 
@@ -114,7 +451,7 @@
             <h2>Quem Somos</h2>
             <p>Com mais de 20 anos de experiência e uma paixão por transformar sonhos em realidade, a Cravo e Canela cria decorações únicas e memoráveis. Cada detalhe é pensado com carinho para refletir a história e a personalidade de cada casal, resultando em eventos que encantam e emocionam.</p>
         </div>
-        <img src="https://i.ibb.co/YTb1VrBc/Whats-App-Image-2025-06-18-at-15-32-14-1.jpg" class="imagem-extra fade-in" alt="Decoração de casamento">
+        <img src="imagens/WhatsApp Image 2025-06-18 at 15.32.14 (1).jpeg" class="imagem-extra fade-in" alt="Decoração de casamento">
     </section>
 
     <section id="servicos" class="content-section">
@@ -126,7 +463,7 @@
             <h4>Decoração para noivados, chás e mini weddings</h4>
             <h4>Produção floral exclusiva para ensaios fotográficos</h4>
         </div>
-        <img src="https://i.ibb.co/CDhMGzV/Whats-App-Image-2025-06-18-at-15-32-16-1.jpg" class="imagem-extra fade-in" alt="Detalhe de arranjo floral">
+        <img src="imagens/WhatsApp Image 2025-06-18 at 15.32.15 (1).jpeg" class="imagem-extra fade-in" alt="Detalhe de arranjo floral">
     </section>
     
     <section class="content-section">
@@ -138,18 +475,18 @@
             <h4>Execução impecável por uma equipe experiente e apaixonada</h4>
             <h4>Cenários perfeitos para fotos inesquecíveis</h4>
         </div>
-        <img src="https://i.ibb.co/MDRJL9BY/Whats-App-Image-2025-06-18-at-15-32-15-2.jpg" class="imagem-extra fade-in" alt="Mesa de doces decorada">
+        <img src="imagens/WhatsApp Image 2025-06-18 at 15.32.15 (2).jpeg" class="imagem-extra fade-in" alt="Mesa de doces decorada">
     </section>
 
     <section id="galeria" class="gallery">
         <h2 class="fade-in">Galeria de Inspirações</h2>
         <div class="gallery-grid">
-            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="https://i.ibb.co/YTb1VrBc/Whats-App-Image-2025-06-18-at-15-32-14-1.jpg" alt="Galeria imagem 1"></div>
-            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="https://i.ibb.co/CDhMGzV/Whats-App-Image-2025-06-18-at-15-32-16-1.jpg" alt="Galeria imagem 2"></div>
-            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="https://i.ibb.co/MDRJL9BY/Whats-App-Image-2025-06-18-at-15-32-15-2.jpg" alt="Galeria imagem 3"></div>
-            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="https://i.ibb.co/YTb1VrBc/Whats-App-Image-2025-06-18-at-15-32-14-1.jpg" alt="Galeria imagem 4"></div>
-            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="https://i.ibb.co/CDhMGzV/Whats-App-Image-2025-06-18-at-15-32-16-1.jpg" alt="Galeria imagem 5"></div>
-            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="https://i.ibb.co/MDRJL9BY/Whats-App-Image-2025-06-18-at-15-32-15-2.jpg" alt="Galeria imagem 6"></div>
+            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="imagens/WhatsApp Image 2025-06-18 at 15.32.14.jpeg" alt="Galeria imagem 1"></div>
+            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="imagens/WhatsApp Image 2025-06-18 at 15.32.16 (3).jpeg" alt="Galeria imagem 2"></div>
+            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="imagens/WhatsApp Image 2025-06-18 at 15.32.16.jpeg" alt="Galeria imagem 3"></div>
+            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="imagens/WhatsApp Image 2025-06-18 at 15.32.15 (1).jpeg" alt="Galeria imagem 4"></div>
+            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="imagens/WhatsApp Image 2025-06-18 at 15.32.15 (2).jpeg" alt="Galeria imagem 5"></div>
+            <div class="gallery-item fade-in"><div class="gallery-overlay"><i class='bx bx-search-alt'></i></div><img src="imagens/WhatsApp Image 2025-06-18 at 15.32.16 (2).jpeg" alt="Galeria imagem 6"></div>
         </div>
     </section>
 
@@ -164,6 +501,11 @@
                 <p class="testimonial-text">"Não tenho palavras para descrever a emoção ao ver a igreja e o salão. Estava um sonho! Vocês são incríveis."</p>
                 <p class="testimonial-author">- Beatriz & Ricardo</p>
             </div>
+            <div class="testimonial-slide">
+                <p class="testimonial-text">"O melhor investimento do nosso casamento. A decoração fez toda a diferença e rendeu as fotos mais lindas da vida. Recomendo de olhos fechados!"</p>
+                <p class="testimonial-author">- Livia & Fernando</p>
+            </div>
+            <div class="dots-container"></div>
         </div>
     </section>
 
@@ -190,38 +532,97 @@
 </footer>
 
 <script>
-    // Todo o JavaScript continua igual e funcional
     document.addEventListener('DOMContentLoaded', function() {
+
+        // --- Animação da Barra de Navegação ao Rolar ---
         const nav = document.getElementById('navbar');
-        if (nav) { window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } }); }
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        if (nav) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        }
+        
+        // --- Animação de Elementos ao Rolar (Fade-in) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const elementsToAnimate = document.querySelectorAll('.fade-in');
+        elementsToAnimate.forEach(el => observer.observe(el));
+        
+        // --- Carrossel de Depoimentos ---
         const slides = document.querySelectorAll('.testimonial-slide');
         const dotsContainer = document.querySelector('.dots-container');
         let currentSlide = 0;
         let slideInterval;
+
         if (slides.length > 0) {
-            slides.forEach((slide, index) => { const dot = document.createElement('span'); dot.classList.add('dot'); if (index === 0) dot.classList.add('active'); dot.addEventListener('click', () => { showSlide(index); resetInterval(); }); dotsContainer.appendChild(dot); });
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    resetInterval();
+                });
+                dotsContainer.appendChild(dot);
+            });
+
             const dots = document.querySelectorAll('.dot');
-            function showSlide(index) { slides.forEach((slide, i) => { slide.classList.remove('active'); dots[i].classList.remove('active'); }); slides[index].classList.add('active'); dots[index].classList.add('active'); currentSlide = index; }
-            function nextSlide() { let newIndex = currentSlide + 1; if (newIndex >= slides.length) { newIndex = 0; } showSlide(newIndex); }
-            function startInterval() { slideInterval = setInterval(nextSlide, 5000); }
-            function resetInterval() { clearInterval(slideInterval); startInterval(); }
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    dots[i].classList.remove('active');
+                });
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                let newIndex = currentSlide + 1;
+                if (newIndex >= slides.length) { newIndex = 0; }
+                showSlide(newIndex);
+            }
+
+            function startInterval() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startInterval();
+            }
+
             showSlide(0);
             startInterval();
         }
+
+        // --- SCRIPT: Formulário para WhatsApp ---
         const form = document.getElementById('whatsapp-form');
         form.addEventListener('submit', function(event) {
             event.preventDefault(); 
+
             const phoneNumber = '5519999439476';
             const name = document.getElementById('form-name').value;
             const email = document.getElementById('form-email').value;
-            const message = document.getElementById('form-message').value
+            const message = document.getElementById('form-message').value;
             const whatsappMessage = `Olá! Gostaria de um orçamento.\n\n*Nome:* ${name}\n*E-mail:* ${email}\n\n*Mensagem:*\n${message}`;
             const encodedMessage = encodeURIComponent(whatsappMessage);
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
         });
+
     });
 </script>
 
